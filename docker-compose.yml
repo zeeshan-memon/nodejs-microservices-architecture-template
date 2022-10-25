@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  service1:
+    image: service1
+    build: ./service1
+    ports:
+      - "8001:8001"
+    restart: always
+    network_mode: host
+    environment:
+      - NODE_ENV=${env}-service1
+  service2:
+    image: service2
+    build: ./service2
+    ports:
+      - "8002:8002"
+    restart: always
+    network_mode: host
+    environment:
+      - NODE_ENV=${env}-service2 
+    volumes:
+      - /home/heykarry/hk-backend-evolved/files:/app/files

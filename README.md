@@ -1,2 +1,0 @@
-# nodejs-monolithic-architecture-template
-

@@ -131,7 +131,7 @@ const errorMessage = (e) => {
  */
 
 let mailConfig = {
-  name: "mail.zambazaar.com",
+  name: "mail.test.com",
   host: process.env.SMTP,
   port: process.env.EMAILPORT,
   secure: true,
@@ -156,7 +156,7 @@ exports.sendEmail = (obj) => {
       let mail = nodemailer.createTransport(mailConfig);
       mail.sendMail(
         {
-          from: `'Zambazaar'<${process.env.EMAIL}>`,
+          from: `'test'<${process.env.EMAIL}>`,
           to: obj.Recipients,
           subject: obj.Subject,
           html: obj.message,

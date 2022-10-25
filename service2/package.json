@@ -1,0 +1,53 @@
+{
+  "name": "nodejs-monolithic-architecture-template",
+  "version": "1.0.0",
+  "description": "This is template project for next projects.",
+  "main": "app.js",
+  "scripts": {
+    "local": "cross-env NODE_ENV=local-service2 nodemon app.js",
+    "dev": "cross-env NODE_ENV=dev-service2 pm2 start app.js --name 'abc'",
+    "stag": "cross-env NODE_ENV=staging-service2 pm2 start app.js --name 'abc'",
+    "prod": "cross-env NODE_ENV=prod-service2 pm2 start app.js --name 'abc'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeeshan-memon/zamshopbackend.git"
+  },
+  "author": "Zeeshan Ahmed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zeeshan-memon/zamshopbackend/issues"
+  },
+  "homepage": "https://github.com/zeeshan-memon/zamshopbackend#readme",
+  "dependencies": {
+    "@socket.io/redis-adapter": "^7.2.0",
+    "apidoc": "^0.51.1",
+    "axios": "^0.24.0",
+    "bcrypt": "^5.0.1",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "express-validator": "^6.13.0",
+    "jsonwebtoken": "^8.5.1",
+    "mathjs": "^9.5.0",
+    "method-override": "^3.0.0",
+    "moment": "^2.29.1",
+    "mongoose": "^6.6.5",
+    "mongoose-sequence": "^5.3.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.3",
+    "node-redis-scan": "^1.3.3",
+    "nodemailer": "^6.6.5",
+    "redis": "^4.1.0",
+    "round-to": "^5.0.0",
+    "sequelize": "^6.3.4",
+    "socket.io": "^4.4.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.20"
+  }
+}
