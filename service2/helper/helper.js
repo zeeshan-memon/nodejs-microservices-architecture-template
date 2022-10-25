@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const axios = require('axios');
 const moment = require('moment');
 const roundTo = require('round-to');
+const This = this;
 
 exports.errorMessage = (error) => {
   console.log(
@@ -199,7 +200,7 @@ exports.toMongooseObjectId = (e) => {
   };
 
   if (data) {
-    options.data = (helper.toBoolean(process.env.ENCRYPTION)) ? {
+    options.data = (This.toBoolean(process.env.ENCRYPTION)) ? {
       d: encodeObject(data)
     } : data
   }
@@ -209,7 +210,7 @@ exports.toMongooseObjectId = (e) => {
       .then(function (response) {
         // console.log("response.data.d", response.data.d)
 
-        if (helper.toBoolean(process.env.ENCRYPTION))
+        if (This.toBoolean(process.env.ENCRYPTION))
           response = decodeObject(response.data.d);
         else
           response = response.data
