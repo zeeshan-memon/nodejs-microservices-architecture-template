@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zeeshan-memon/zamshopbackend.git"
+    "url": "git+http://services.ignitelabs.co:7990/scm/nst/nodejs-microservices-architecture-template.git"
   },
   "author": "Zeeshan Ahmed",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zeeshan-memon/zamshopbackend/issues"
+    "url": "http://services.ignitelabs.co:7990/scm/nst/nodejs-microservices-architecture-template/issues"
   },
-  "homepage": "https://github.com/zeeshan-memon/zamshopbackend#readme",
+  "homepage": "http://services.ignitelabs.co:7990/scm/nst/nodejs-microservices-architecture-template#readme",
   "dependencies": {
     "@socket.io/redis-adapter": "^7.2.0",
     "apidoc": "^0.51.1",
