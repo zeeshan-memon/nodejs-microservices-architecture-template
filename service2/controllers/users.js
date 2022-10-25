@@ -3,6 +3,7 @@ const repository = require("../helper/repository");
 const templates = require("../helper/templates");
 const userModel = require("../models/user");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const { validationResult } = require("express-validator");
 
 module.exports = {
@@ -247,7 +248,8 @@ const fnLogin = async (req, res) => {
         .status(200)
         .json(helper.errorMessage(helper.statusMessages.account_not_found));
     } else if (user) {
-      bcrypt.compare(body.password, user.password, (err, result) => {
+      bcrypt.compare(body.password, user.password, (error, result) => {
+          if(error) return res.status(200).json(helper.errorMessage(error))
         if (result) {
           let data = {
             _id: user._id,
@@ -257,20 +259,19 @@ const fnLogin = async (req, res) => {
 
           jwt.sign(
             data,
-            process.env.secret,
+            process.env.TOKEN_SECRET,
             // {
             //   expiresIn: process.env.expirytime,
             // },
             async (error, token) => {
               if (error)
                 return res.status(200).json(helper.errorMessage(error));
-              temp.isAdmin = user.isAdmin;
+              
+                temp.isAdmin = user.isAdmin;
               temp.userName = user.userName;
               temp.token = token;
               temp.email = user.email;
-
-              if (helper.toBoolean(process.env.IsMONIT))
-                return res.status(200).json(helper.SuccessMessage(temp));
+              return res.status(200).json(helper.SuccessMessage(temp));
             }
           );
         } else {

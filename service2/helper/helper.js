@@ -199,7 +199,7 @@ exports.toMongooseObjectId = (e) => {
   };
 
   if (data) {
-    options.data = (boolean(process.env.ENCRYPTION)) ? {
+    options.data = (helper.toBoolean(process.env.ENCRYPTION)) ? {
       d: encodeObject(data)
     } : data
   }
@@ -209,7 +209,7 @@ exports.toMongooseObjectId = (e) => {
       .then(function (response) {
         // console.log("response.data.d", response.data.d)
 
-        if (boolean(process.env.ENCRYPTION))
+        if (helper.toBoolean(process.env.ENCRYPTION))
           response = decodeObject(response.data.d);
         else
           response = response.data
