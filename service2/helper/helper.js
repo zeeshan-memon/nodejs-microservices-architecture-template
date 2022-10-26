@@ -189,43 +189,41 @@ exports.toMongooseObjectId = (e) => {
  * ===================================================================================================================
  */
 
- exports.axios = (url, req, httpMethod, serviceName, data) => {
+ exports.axios = (url, httpMethod, headers, data) => {
   const options = {
     method: httpMethod,
-    headers: {
-      'content-type': 'application/json',
-      authorization: req.headers['authorization'],
-    },
+    headers: headers,
     url,
+    data: data
   };
-
-  if (data) {
-    options.data = (This.toBoolean(process.env.ENCRYPTION)) ? {
-      d: encodeObject(data)
-    } : data
-  }
 
   return new Promise((resolve, reject) => {
     axios(options)
       .then(function (response) {
-        // console.log("response.data.d", response.data.d)
-
-        if (This.toBoolean(process.env.ENCRYPTION))
-          response = decodeObject(response.data.d);
-        else
           response = response.data
-
-        // console.log("response", response)
-
-        if (response.status) {
-          resolve(response.response);
+        if (response.error) {
+          reject(`${response}`)
         } else {
-          reject(`Encountered an error from ${serviceName} : ${response.error}`)
+          resolve(response);
         }
       })
       .catch(function (error) {
-        error.message = `${serviceName} unable to establish the connection: ${error}`
-        reject(error);
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          reject(error.response.data);
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log("error.request");
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message);
+          reject(error.message);
+        }
+        
       });
   });
 };
