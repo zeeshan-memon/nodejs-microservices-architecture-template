@@ -7,7 +7,7 @@ exports.tokenValidation = (req, res, next) => {
     next();
   } else {
     try {
-      const token = req.header["authorization"];
+      const token = req.headers["authorization"];
       jwt.verify(token, process.env.ENCRYPTIONKEY, (err, decode) => {
         if (err) {
           return res
