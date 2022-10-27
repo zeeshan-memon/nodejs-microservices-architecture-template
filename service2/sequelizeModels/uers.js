@@ -1,6 +1,5 @@
 const db = require('../configs/sequelize')
 const Sequelize = require('sequelize');
-module.exports = () => {
     let model = {
         id: {
             type: Sequelize.BIGINT,
@@ -91,7 +90,4 @@ module.exports = () => {
         },
     }
 
-    return db.define('user', model, {
-        db
-    });
-}
+    module.exports = db.define('user', model);
